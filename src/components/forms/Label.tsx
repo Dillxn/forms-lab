@@ -1,10 +1,12 @@
 export default function Label({
   label,
   name,
-  children,
+  className,
+  children
 }: {
   label?: string;
   name?: string;
+  className?: string;
   children?: React.ReactNode;
 }) {
   const camelToLabel = (text: string | undefined) =>
@@ -18,7 +20,7 @@ export default function Label({
       .join(" ");
 
   return (
-    <label>
+    <label className={className}>
       {label ?? camelToLabel(name)}
       {children}
     </label>

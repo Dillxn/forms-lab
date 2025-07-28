@@ -1,8 +1,11 @@
 import createUserProfile from "@/actions/createUserProfile";
+import Address from "@/components/forms/Address";
+import Checkbox from "@/components/forms/Checkbox";
 import Form from "@/components/forms/Form";
 import Input from "@/components/forms/Input";
 import Label from "@/components/forms/Label";
 import Page from "@/components/forms/Page";
+import Radio from "@/components/forms/Radio";
 
 export default function HomePage() {
   return (
@@ -10,14 +13,14 @@ export default function HomePage() {
       <Page>
         <Input name="firstName" />
         <Input name="lastName" />
-        <Address name="shippingAddress" />
+        <Address name="shipping" />
       </Page>
       <Page>
         <Checkbox
           name="sameShippingBillingAddress"
           label="Billing address is same as shipping"
         />
-        <Address name="billingAddress" disabled="sameShippingBillingAddress" />
+        <Address name="billing" disabled="sameShippingBillingAddress" />
         <h3>Municipality check</h3>
         <Radio
           name="isMunicipality"

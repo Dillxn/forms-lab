@@ -11,7 +11,7 @@ export default function Page({
   const formContext = useContext(FormContext);
   const context = {
     ...formContext,
-    required: formContext.required ?? required,
+    required: formContext.required || required,
   };
   return <FormContext value={context}>{children}</FormContext>;
 }

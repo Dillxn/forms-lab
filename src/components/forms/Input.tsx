@@ -1,21 +1,27 @@
-import { useContext } from "react";
+import { HTMLInputTypeAttribute, useContext } from "react";
 import { FieldProps, FormContext } from "./Form";
 import Label from "./Label";
 
+export type InputProps = {
+  pattern?: RegExp | string;
+  type?: HTMLInputTypeAttribute;
+  checked?: boolean;
+} & FieldProps;
+
 export default function Input({
   label,
-  name,
   required,
-  defaultValue,
-}: FieldProps) {
+  pattern,
+  ...props
+}: InputProps) {
   const formContext = useContext(FormContext);
 
   return (
     <Label label={label}>
       <input
-        name={name}
         required={formContext.required || required}
-        defaultValue={defaultValue}
+        pattern={String(pattern)}
+        {...props}
       />
     </Label>
   );

@@ -11,6 +11,7 @@ export type FieldProps = {
   name?: string;
   required?: boolean;
   defaultValue?: string;
+  value?: string;
 };
 
 export const FormContext = createContext<FormContext>({});

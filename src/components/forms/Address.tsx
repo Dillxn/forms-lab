@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FieldProps, FormContext } from "./Form";
+import { FieldProps, FormContext, FormContextProps } from "./Form";
 import Input from "./Input";
 import Select from "./Select";
 import Label from "./Label";
@@ -7,14 +7,16 @@ import Label from "./Label";
 export default function Address({
   label,
   name,
-  required,
   defaultValue,
   value,
-}: FieldProps) {
+  required,
+  disabled,
+}: FieldProps & Partial<FormContextProps>) {
   const formContext = useContext(FormContext);
 
-  const context = {
-    required: formContext.required || required,
+  const context: FormContextProps = {
+    required: required ?? formContext.required,
+    disabled: disabled ?? formContext.disabled,
   };
 
   return (

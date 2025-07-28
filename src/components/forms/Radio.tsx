@@ -1,5 +1,4 @@
 import Input, { InputProps } from "./Input";
-import Label from "./Label";
 
 type RadioProps = {
   options?: Array<{
@@ -21,9 +20,10 @@ export default function Radio({
   return (
     <>
       {options?.map(({ value, label }) => (
-        <Label key={value} label={label}>
+        <label key={value}>
+          {label}
           <Input type="radio" {...props} checked={value === defaultValue} />
-        </Label>
+        </label>
       ))}
     </>
   );

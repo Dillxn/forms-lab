@@ -1,6 +1,7 @@
-import React from "react";
-import { FieldProps } from "./Form";
+import React, { useContext } from "react";
+import { FieldProps, FormContext, FormContextProps } from "./Form";
 import Label from "./Label";
+import { isToggled } from "./Input";
 
 type LabelProps = {
   options?: Array<{
@@ -12,19 +13,36 @@ type LabelProps = {
 export default function Select({
   label,
   name,
-  required,
   defaultValue,
+  required,
+  disabled,
+  visible,
   options,
-  children
-}: FieldProps & LabelProps & { children?: React.ReactNode }) {
+  children,
+}: FieldProps &
+  Partial<FormContextProps> &
+  LabelProps & { children?: React.ReactNode }) {
+  const formContext = useContext(FormContext);
+  const context: FormContextProps = {
+    required: required ?? formContext.required,
+    disabled: disabled ?? formContext.disabled,
+    visible: visible ?? formContext.visible,
+    data: formContext.data,
+  };
   return (
     <Label label={label}>
-      <select name={name} required={required} defaultValue={defaultValue}>
-        {children ?? options?.map(({ value, label }) => (
-          <option key={value} value={value}>
-            {label ?? value}
-          </option>
-        ))}
+      <select
+        name={name}
+        required={context.required}
+        disabled={isToggled(context, "disabled")}
+        defaultValue={defaultValue}
+      >
+        {children ??
+          options?.map(({ value, label }) => (
+            <option key={value} value={value}>
+              {label ?? value}
+            </option>
+          ))}
       </select>
     </Label>
   );

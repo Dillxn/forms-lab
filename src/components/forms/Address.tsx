@@ -11,12 +11,15 @@ export default function Address({
   value,
   required,
   disabled,
+  visible,
 }: FieldProps & Partial<FormContextProps>) {
   const formContext = useContext(FormContext);
 
   const context: FormContextProps = {
     required: required ?? formContext.required,
     disabled: disabled ?? formContext.disabled,
+    visible: visible ?? formContext.visible,
+    data: formContext.data,
   };
 
   return (

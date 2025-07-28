@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { FieldProps, FormContext, FormContextProps } from "./Form";
+import { FormContext, FormContextProps } from "./Form";
 import Label from "./Label";
-import { isToggled } from "./Input";
+import { FieldProps, isToggled } from "./Input";
 
 type LabelProps = {
   options?: Array<{

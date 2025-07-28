@@ -16,13 +16,6 @@ export type FormContextProps = {
   data: Record<string, string>;
 };
 
-export type FieldProps = {
-  label?: string;
-  name?: string;
-  defaultValue?: string;
-  value?: string;
-};
-
 export const FormContext = createContext<FormContextProps>({
   required: false,
   disabled: false,

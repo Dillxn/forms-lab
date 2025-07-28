@@ -1,6 +1,13 @@
 import { HTMLInputTypeAttribute, useContext } from "react";
-import { FieldProps, FormContext, FormContextProps } from "./Form";
+import { FormContext, FormContextProps } from "./Form";
 import Label from "./Label";
+
+export type FieldProps = {
+  label?: string;
+  name?: string;
+  defaultValue?: string;
+  value?: string;
+};
 
 export type InputProps = {
   pattern?: RegExp | string;
@@ -9,14 +16,24 @@ export type InputProps = {
 } & FieldProps &
   Partial<FormContextProps>;
 
+// isToggled() - Returns whether a property is set explicitly,
+//                or dependently on a field
 export const isToggled = (
   context: FormContextProps,
   property: keyof FormContextProps
 ) => {
-  if (typeof context[property] === "boolean") {
-    return context[property];
-  } else if (typeof context[property] === "string") {
-    return context.data[context[property]] === "true";
+  const propertyValue = context[property];
+  const propertyIsBoolean = typeof propertyValue === "boolean";
+  const propertyIsFieldName = typeof propertyValue === "string";
+
+  if (propertyIsBoolean) {
+    return propertyValue;
+
+  } else if (propertyIsFieldName) {
+    const fieldValue = context.data[propertyValue];
+    const fieldIsToggled = fieldValue === "true";
+
+    return fieldIsToggled;
   }
 };
 
@@ -40,7 +57,7 @@ export default function Input({
     <Label label={label}>
       <input
         required={context.required}
-        disabled={isToggled(context, 'disabled')}
+        disabled={isToggled(context, "disabled")}
         pattern={String(pattern)}
         {...props}
       />

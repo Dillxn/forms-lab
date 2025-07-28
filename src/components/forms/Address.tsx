@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { FieldProps, FormContext, FormContextProps } from "./Form";
-import Input from "./Input";
+import { FormContext, FormContextProps } from "./Form";
+import Input, { FieldProps } from "./Input";
 import Select from "./Select";
 import Label from "./Label";
 

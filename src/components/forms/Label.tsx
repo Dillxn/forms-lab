@@ -1,14 +1,17 @@
+import { FormContextProps } from "./Form";
+
 export default function Label({
   label,
   name,
   className,
-  children
+  visible,
+  children,
 }: {
   label?: string;
   name?: string;
   className?: string;
   children?: React.ReactNode;
-}) {
+} & Partial<FormContextProps>) {
   const camelToLabel = (text: string | undefined) =>
     text
       ?.split(/(?=[A-Z])/)

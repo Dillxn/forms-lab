@@ -27,7 +27,7 @@ export default function Address({
   return (
     <>
       <FormContext value={context}>
-        <Label label={label}>
+        <Label label={label} name={name}>
           <Input name={`${name}Street`} label="Street Address" />
           <Input name={`${name}City`} label="City" />
           <Select

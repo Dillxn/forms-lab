@@ -39,6 +39,7 @@ export const isToggled = (
 };
 
 export default function Input({
+  name,
   label,
   pattern,
   required,
@@ -55,7 +56,7 @@ export default function Input({
   };
 
   return (
-    <Label label={label}>
+    <Label label={label} name={name}>
       <input
         required={context.required}
         disabled={isToggled(context, 'disabled')}

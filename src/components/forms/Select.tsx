@@ -32,7 +32,7 @@ export default function Select({
     data: formContext.data,
   };
   return (
-    <Label label={label}>
+    <Label label={label} name={name}>
       <select
         name={name}
         required={context.required}

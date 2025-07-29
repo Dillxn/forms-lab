@@ -1,3 +1,5 @@
+import '@/app/globals.css';
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className="bg-gray-200 p-16">{children}</body>
+      <body className="p-4">{children}</body>
     </html>
   );
 }

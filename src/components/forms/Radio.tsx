@@ -24,7 +24,7 @@ export default function Radio({
       {options?.map(({ value, label }) => (
         <label key={value}>
           {label}
-          <Input type="radio" {...props} checked={value === defaultValue} />
+          <Input type="radio" {...props} defaultChecked={value === defaultValue} />
         </label>
       ))}
     </>

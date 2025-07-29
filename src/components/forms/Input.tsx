@@ -14,7 +14,7 @@ export type FieldProps = {
 export type InputProps = {
   pattern?: RegExp | string;
   type?: HTMLInputTypeAttribute;
-  checked?: boolean;
+  defaultChecked?: boolean;
 } & FieldProps &
   Partial<FormContextProps>;
 

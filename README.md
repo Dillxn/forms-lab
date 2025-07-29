@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+    <img alt="Forms Lab logo" src="https://github.com/Dillxn/forms-lab/raw/refs/heads/main/logo.svg" height="128">
+</div>
+<div align="center">
+<img alt="Join the community on GitHub" src="https://img.shields.io/badge/Made_for_Next.js-blue.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20">
+<img alt="License" src="https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000">
+
+</div>
 
 ## Getting Started
 
-First, run the development server:
+**Formslab** is an experiment in making forms in Next.js _fun_ and _easy_. It is designed with a radically simple API and built with a DX-first philosophy.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+A form in Formslab is created using simple-to-use, composable Lego-like components. For example:
+
+```jsx
+<Form action={createUserProfile} required>
+  <Page>
+    <Input name="firstName" />
+    <Input name="lastName" />
+    <Address name="shipping" />
+  </Page>
+  <Page>
+    <Checkbox
+      name="sameShippingBilling"
+      label="Billing address is same as shipping"
+    />
+    <Address name="billing" disabled="sameShippingBilling" />
+    <h3>Municipality check</h3>
+    <Radio
+      name="isMunicipality"
+      label="Are you a municipality?"
+    />
+    <Label
+      className="text-red"
+      label="Please provide a purchase order at checkout"
+      visible="isMunicipality"
+    />
+  </Page>
+</Form>
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

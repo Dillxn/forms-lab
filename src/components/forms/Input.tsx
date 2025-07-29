@@ -1,6 +1,8 @@
-import { HTMLInputTypeAttribute, useContext } from "react";
-import { FormContext, FormContextProps } from "./Form";
-import Label from "./Label";
+'use client';
+
+import { HTMLInputTypeAttribute, useContext } from 'react';
+import { FormContext, FormContextProps } from './Form';
+import Label from './Label';
 
 export type FieldProps = {
   label?: string;
@@ -20,18 +22,17 @@ export type InputProps = {
 //                or dependently on a field
 export const isToggled = (
   context: FormContextProps,
-  property: keyof FormContextProps
+  property: keyof FormContextProps,
 ) => {
   const propertyValue = context[property];
-  const propertyIsBoolean = typeof propertyValue === "boolean";
-  const propertyIsFieldName = typeof propertyValue === "string";
+  const propertyIsBoolean = typeof propertyValue === 'boolean';
+  const propertyIsFieldName = typeof propertyValue === 'string';
 
   if (propertyIsBoolean) {
     return propertyValue;
-
   } else if (propertyIsFieldName) {
     const fieldValue = context.data[propertyValue];
-    const fieldIsToggled = fieldValue === "true";
+    const fieldIsToggled = fieldValue === 'true';
 
     return fieldIsToggled;
   }
@@ -57,7 +58,7 @@ export default function Input({
     <Label label={label}>
       <input
         required={context.required}
-        disabled={isToggled(context, "disabled")}
+        disabled={isToggled(context, 'disabled')}
         pattern={String(pattern)}
         {...props}
       />

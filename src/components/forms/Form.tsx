@@ -1,11 +1,12 @@
+'use client';
+
 import {
   ChangeEvent,
   createContext,
-  FormEvent,
   useActionState,
   useContext,
   useState,
-} from "react";
+} from 'react';
 
 type FormAction = (state: unknown, payload: FormData) => unknown;
 
@@ -56,6 +57,7 @@ export default function Form({
   return (
     <form onChange={onChange}>
       <FormContext value={context}>{children}</FormContext>
+      <button type="submit">Submit</button>
     </form>
   );
 }

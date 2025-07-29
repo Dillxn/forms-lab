@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
-import { FormContext, FormContextProps } from "./Form";
-import Label from "./Label";
-import { FieldProps, isToggled } from "./Input";
+'use client';
+
+import React, { useContext } from 'react';
+import { FormContext, FormContextProps } from './Form';
+import Label from './Label';
+import { FieldProps, isToggled } from './Input';
 
 type LabelProps = {
   options?: Array<{
@@ -34,7 +36,7 @@ export default function Select({
       <select
         name={name}
         required={context.required}
-        disabled={isToggled(context, "disabled")}
+        disabled={isToggled(context, 'disabled')}
         defaultValue={defaultValue}
       >
         {children ??

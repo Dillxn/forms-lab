@@ -1,5 +1,7 @@
-import { useContext } from "react";
-import { FormContext, FormContextProps } from "./Form";
+'use client';
+
+import { useContext } from 'react';
+import { FormContext, FormContextProps } from './Form';
 
 export default function Page({
   children,

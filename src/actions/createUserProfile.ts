@@ -1,3 +1,8 @@
-export default function createUserProfile(initialState: any, formData: FormData) {
+'use server';
+
+export default async function createUserProfile(
+  initialState: unknown,
+  formData: FormData,
+) {
   return true;
 }

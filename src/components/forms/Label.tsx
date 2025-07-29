@@ -1,4 +1,6 @@
-import { FormContextProps } from "./Form";
+'use client';
+
+import { FormContextProps } from './Form';
 
 export default function Label({
   label,
@@ -18,9 +20,9 @@ export default function Label({
       .map((word, index) =>
         index === 0
           ? word[0].toUpperCase() + word.substring(1).toLowerCase()
-          : word.toLowerCase()
+          : word.toLowerCase(),
       )
-      .join(" ");
+      .join(' ');
 
   return (
     <label className={className}>

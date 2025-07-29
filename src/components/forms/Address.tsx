@@ -1,8 +1,10 @@
-import { useContext } from "react";
-import { FormContext, FormContextProps } from "./Form";
-import Input, { FieldProps } from "./Input";
-import Select from "./Select";
-import Label from "./Label";
+'use client';
+
+import { useContext } from 'react';
+import { FormContext, FormContextProps } from './Form';
+import Input, { FieldProps } from './Input';
+import Select from './Select';
+import Label from './Label';
 
 export default function Address({
   label,
@@ -32,8 +34,8 @@ export default function Address({
             name={`${name}State`}
             label="State"
             options={[
-              { value: "KY", label: "Kentucky" },
-              { value: "TN", label: "Tennessee" },
+              { value: 'KY', label: 'Kentucky' },
+              { value: 'TN', label: 'Tennessee' },
             ]}
           />
           <Input

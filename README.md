@@ -27,10 +27,7 @@ A form in Formslab is created using simple-to-use, composable Lego-like componen
     />
     <Address name="billing" disabled="sameShippingBilling" />
     <h3>Municipality check</h3>
-    <Radio
-      name="isMunicipality"
-      label="Are you a municipality?"
-    />
+    <Radio name="isMunicipality" label="Are you a municipality?" />
     <Label
       className="text-red"
       label="Please provide a purchase order at checkout"

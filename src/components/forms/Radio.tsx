@@ -1,15 +1,17 @@
-import Input, { InputProps } from "./Input";
+'use client';
+
+import Input, { InputProps } from './Input';
 
 type RadioProps = {
   options?: Array<{
     value: string;
     label?: string;
   }>;
-} & Omit<InputProps, "type">;
+} & Omit<InputProps, 'type'>;
 
 const defaultOptions = [
-  { value: "true", label: "Yes" },
-  { value: "false", label: "No" },
+  { value: 'true', label: 'Yes' },
+  { value: 'false', label: 'No' },
 ];
 
 export default function Radio({

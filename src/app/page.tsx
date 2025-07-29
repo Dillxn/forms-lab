@@ -1,11 +1,11 @@
-import createUserProfile from "@/actions/createUserProfile";
-import Address from "@/components/forms/Address";
-import Checkbox from "@/components/forms/Checkbox";
-import Form from "@/components/forms/Form";
-import Input from "@/components/forms/Input";
-import Label from "@/components/forms/Label";
-import Page from "@/components/forms/Page";
-import Radio from "@/components/forms/Radio";
+import createUserProfile from '@/actions/createUserProfile';
+import Address from '@/components/forms/Address';
+import Checkbox from '@/components/forms/Checkbox';
+import Form from '@/components/forms/Form';
+import Input from '@/components/forms/Input';
+import Label from '@/components/forms/Label';
+import Page from '@/components/forms/Page';
+import Radio from '@/components/forms/Radio';
 
 export default function HomePage() {
   return (

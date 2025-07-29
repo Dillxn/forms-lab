@@ -13,14 +13,14 @@ export default function HomePage() {
       <Page>
         <Input name="firstName" />
         <Input name="lastName" />
-        <Address name="shipping" />
+        <Address name="shippingAddress" />
       </Page>
       <Page>
         <Checkbox
           name="sameShippingBillingAddress"
           label="Billing address is same as shipping"
         />
-        <Address name="billing" disabled="sameShippingBillingAddress" />
+        <Address name="billingAddress" disabled="sameShippingBillingAddress" />
         <h3>Municipality check</h3>
         <Radio
           name="isMunicipality"

@@ -16,7 +16,7 @@ export default function Label({
   children?: React.ReactNode;
 } & Partial<IFormContext>) {
   return (
-    <div className="relative">
+    <label className="relative">
       {isFocused && (
         <span
           className="text-indigo-400 absolute text-xs -top-2 left-2
@@ -27,6 +27,6 @@ export default function Label({
         </span>
       )}
       {children}
-    </div>
+    </label>
   );
 }

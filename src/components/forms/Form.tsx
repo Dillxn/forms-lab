@@ -10,18 +10,16 @@ import {
 
 type FormAction = (state: unknown, payload: FormData) => unknown;
 
-export type FormContextProps = {
-  required: boolean;
-  disabled: boolean | string;
-  visible: boolean | string;
-  data: Record<string, string>;
+export interface IFormContext {
+  required?: boolean;
+  disabled?: boolean | string;
+  visible?: boolean | string;
+  data?: Record<string, string>;
+  groupLevel?: number;
 };
 
-export const FormContext = createContext<FormContextProps>({
-  required: false,
-  disabled: false,
-  visible: true,
-  data: {},
+export const FormContext = createContext<IFormContext>({
+  groupLevel: 0,
 });
 
 export default function Form({
@@ -33,18 +31,19 @@ export default function Form({
 }: {
   children: React.ReactNode;
   action: FormAction;
-} & Partial<FormContextProps>) {
+} & Partial<IFormContext>) {
   const [state, formAction, isPending] = useActionState(action, null);
 
   const [formData, setFormData] = useState({});
 
   const formContext = useContext(FormContext);
 
-  const context: FormContextProps = {
+  const context: IFormContext = {
     required: required ?? formContext.required,
     disabled: disabled ?? formContext.disabled,
     visible: visible ?? formContext.visible,
     data: formData,
+    groupLevel: 0,
   };
 
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {
@@ -55,7 +54,7 @@ export default function Form({
   };
 
   return (
-    <form onChange={onChange}>
+    <form onChange={onChange} className="grid gap-2 p-2 transition-all duration-300">
       <FormContext value={context}>{children}</FormContext>
       <button type="submit">Submit</button>
     </form>

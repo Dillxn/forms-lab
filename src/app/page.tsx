@@ -2,6 +2,7 @@ import createUserProfile from '@/actions/createUserProfile';
 import Address from '@/components/forms/Address';
 import Checkbox from '@/components/forms/Checkbox';
 import Form from '@/components/forms/Form';
+import Hint from '@/components/forms/Hint';
 import Input from '@/components/forms/Input';
 import Label from '@/components/forms/Label';
 import Page from '@/components/forms/Page';
@@ -26,8 +27,7 @@ export default function HomePage() {
           name="isMunicipality"
           label="Are you purchasing on behalf of a municipality?"
         />
-        <Label
-          className="text-red"
+        <Hint
           label="Please note that municipalities must provide a purchase order at checkout"
           visible="isMunicipality"
         />

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useContext } from 'react';
-import { FormContext, FormContextProps } from './Form';
-import Label from './Label';
-import { FieldProps, isToggled } from './Input';
+import { FormContext, IFormContext } from './Form';
+import { FieldProps } from './Input';
+import { isToggled } from './util/isToggled';
 
 type LabelProps = {
   options?: Array<{
@@ -22,30 +22,28 @@ export default function Select({
   options,
   children,
 }: FieldProps &
-  Partial<FormContextProps> &
+  Partial<IFormContext> &
   LabelProps & { children?: React.ReactNode }) {
   const formContext = useContext(FormContext);
-  const context: FormContextProps = {
+  const context: IFormContext = {
     required: required ?? formContext.required,
     disabled: disabled ?? formContext.disabled,
     visible: visible ?? formContext.visible,
     data: formContext.data,
   };
   return (
-    <Label label={label} name={name}>
-      <select
-        name={name}
-        required={context.required}
-        disabled={isToggled(context, 'disabled')}
-        defaultValue={defaultValue}
-      >
-        {children ??
-          options?.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label ?? value}
-            </option>
-          ))}
-      </select>
-    </Label>
+    <select
+      name={name}
+      required={context.required}
+      disabled={isToggled(context, 'disabled')}
+      defaultValue={defaultValue}
+    >
+      {children ??
+        options?.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label ?? value}
+          </option>
+        ))}
+    </select>
   );
 }

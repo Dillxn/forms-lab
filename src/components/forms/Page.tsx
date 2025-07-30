@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { FormContext, FormContextProps } from './Form';
+import { FormContext, IFormContext } from './Form';
 
 export default function Page({
   children,
@@ -10,9 +10,9 @@ export default function Page({
   visible,
 }: {
   children: React.ReactNode;
-} & Partial<FormContextProps>) {
+} & Partial<IFormContext>) {
   const formContext = useContext(FormContext);
-  const context: FormContextProps = {
+  const context: IFormContext = {
     required: required ?? formContext.required,
     disabled: disabled ?? formContext.disabled,
     visible: visible ?? formContext.visible,

@@ -1,33 +1,32 @@
 'use client';
 
-import { FormContextProps } from './Form';
+import { IFormContext } from './Form';
 
 export default function Label({
   label,
-  name,
   className,
   visible,
+  isFocused,
   children,
 }: {
   label?: string;
   name?: string;
   className?: string;
+  isFocused?: boolean;
   children?: React.ReactNode;
-} & Partial<FormContextProps>) {
-  const camelToLabel = (text: string | undefined) =>
-    text
-      ?.split(/(?=[A-Z])/)
-      .map((word, index) =>
-        index === 0
-          ? word[0].toUpperCase() + word.substring(1).toLowerCase()
-          : word.toLowerCase(),
-      )
-      .join(' ');
-
+} & Partial<IFormContext>) {
   return (
-    <label className={className}>
-      {label ?? camelToLabel(name)}
+    <div className="relative">
+      {isFocused && (
+        <span
+          className="text-indigo-400 absolute text-xs -top-2 left-2
+            px-0.5 rounded-full
+            bg-[linear-gradient(0deg,white_0%,white_60%,transparent_100%)]"
+        >
+          {label}
+        </span>
+      )}
       {children}
-    </label>
+    </div>
   );
 }

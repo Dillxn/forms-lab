@@ -1,8 +1,10 @@
 'use client';
 
-import { HTMLInputTypeAttribute, useContext } from 'react';
-import { FormContext, FormContextProps } from './Form';
+import { HTMLInputTypeAttribute, useContext, useState } from 'react';
+import { FormContext, IFormContext } from './Form';
 import Label from './Label';
+import { isToggled } from './util/isToggled';
+import { nameToLabel } from './util/nameToLabel';
 
 export type FieldProps = {
   label?: string;
@@ -16,27 +18,7 @@ export type InputProps = {
   type?: HTMLInputTypeAttribute;
   defaultChecked?: boolean;
 } & FieldProps &
-  Partial<FormContextProps>;
-
-// isToggled() - Returns whether a property is set explicitly,
-//                or dependently on a field
-export const isToggled = (
-  context: FormContextProps,
-  property: keyof FormContextProps,
-) => {
-  const propertyValue = context[property];
-  const propertyIsBoolean = typeof propertyValue === 'boolean';
-  const propertyIsFieldName = typeof propertyValue === 'string';
-
-  if (propertyIsBoolean) {
-    return propertyValue;
-  } else if (propertyIsFieldName) {
-    const fieldValue = context.data[propertyValue];
-    const fieldIsToggled = fieldValue === 'true';
-
-    return fieldIsToggled;
-  }
-};
+  Partial<IFormContext>;
 
 export default function Input({
   name,
@@ -47,20 +29,25 @@ export default function Input({
   visible,
   ...props
 }: InputProps) {
+  const [isFocused, setIsFocused] = useState(false);
+
   const formContext = useContext(FormContext);
-  const context: FormContextProps = {
-    required: required ?? formContext.required,
-    disabled: disabled ?? formContext.disabled,
-    visible: visible ?? formContext.visible,
-    data: formContext.data,
-  };
+
+  const labelText = label ?? nameToLabel(name);
 
   return (
-    <Label label={label} name={name}>
+    <Label label={labelText} isFocused={isFocused}>
       <input
-        required={context.required}
-        disabled={isToggled(context, 'disabled')}
+        className={`${formContext.groupLevel === 0 ? 'bg-gray-50' : 'bg-white'}
+          p-2 rounded-md w-full focus:outline-0 focus:ring-2
+          focus:ring-indigo-400 focus:bg-white`}
+        name={name}
+        required={required ?? formContext.required}
+        disabled={isToggled(disabled ?? formContext.disabled, formContext)}
         pattern={String(pattern)}
+        placeholder={isFocused ? '' : labelText}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         {...props}
       />
     </Label>

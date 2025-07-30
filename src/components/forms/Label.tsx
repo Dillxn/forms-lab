@@ -17,16 +17,15 @@ export default function Label({
 } & Partial<IFormContext>) {
   return (
     <label className="relative">
-      {isFocused && (
-        <span
-          className="text-indigo-400 absolute text-xs -top-2 left-2
-            px-0.5 rounded-full
-            bg-[linear-gradient(0deg,white_0%,white_60%,transparent_100%)]"
-        >
-          {label}
-        </span>
-      )}
       {children}
+      <span
+        className="absolute -top-1 left-2 rounded-xs bg-white px-0.5
+          text-xs/2 text-white opacity-0 transition-all duration-100
+          select-none peer-focus:text-indigo-400
+          peer-focus:opacity-100"
+      >
+        {label}
+      </span>
     </label>
   );
 }

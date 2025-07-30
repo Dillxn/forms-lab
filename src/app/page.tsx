@@ -20,7 +20,10 @@ export default function HomePage() {
           name="sameShippingBillingAddress"
           label="Billing address is same as shipping"
         />
-        <Address name="billingAddress" disabled="sameShippingBillingAddress" />
+        <Address
+          name="billingAddress"
+          disabled="sameShippingBillingAddress"
+        />
         <h3>Municipality check</h3>
         <Radio
           name="isMunicipality"

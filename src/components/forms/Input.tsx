@@ -29,17 +29,16 @@ export default function Input({
   visible,
   ...props
 }: InputProps) {
-  const [isFocused, setIsFocused] = useState(false);
-
   const formContext = useContext(FormContext);
 
   const labelText = label ?? nameToLabel(name);
 
   return (
-    <Label label={labelText} isFocused={isFocused}>
+    <Label label={labelText}>
       <input
-        className="bg-gray-50 p-2 rounded-md w-full focus:outline-0
-          focus:ring-2 focus:ring-indigo-400 focus:bg-white"
+        className="peer w-full rounded-md bg-gray-50 p-2 ring-2
+          ring-transparent transition-all duration-100 focus:bg-white
+          focus:ring-indigo-400 focus:outline-0 focus:placeholder-transparent"
         name={name}
         required={required ?? formContext.required}
         disabled={isToggled(
@@ -47,9 +46,7 @@ export default function Input({
           formContext,
         )}
         pattern={String(pattern)}
-        placeholder={isFocused ? '' : labelText}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        placeholder={labelText}
         {...props}
       />
     </Label>

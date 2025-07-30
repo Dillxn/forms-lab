@@ -15,7 +15,7 @@ export interface IFormContext {
   disabled?: boolean | string;
   visible?: boolean | string;
   data?: Record<string, string>;
-};
+}
 
 export const FormContext = createContext<IFormContext>({});
 
@@ -50,7 +50,10 @@ export default function Form({
   };
 
   return (
-    <form onChange={onChange} className="grid gap-2 p-2 transition-all duration-300">
+    <form
+      onChange={onChange}
+      className="grid gap-2 p-2 transition-all duration-300"
+    >
       <FormContext value={context}>{children}</FormContext>
       <button type="submit">Submit</button>
     </form>

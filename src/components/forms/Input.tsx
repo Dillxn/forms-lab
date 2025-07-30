@@ -38,12 +38,14 @@ export default function Input({
   return (
     <Label label={labelText} isFocused={isFocused}>
       <input
-        className={`${formContext.groupLevel === 0 ? 'bg-gray-50' : 'bg-white'}
-          p-2 rounded-md w-full focus:outline-0 focus:ring-2
-          focus:ring-indigo-400 focus:bg-white`}
+        className="bg-gray-50 p-2 rounded-md w-full focus:outline-0
+          focus:ring-2 focus:ring-indigo-400 focus:bg-white"
         name={name}
         required={required ?? formContext.required}
-        disabled={isToggled(disabled ?? formContext.disabled, formContext)}
+        disabled={isToggled(
+          disabled ?? formContext.disabled,
+          formContext,
+        )}
         pattern={String(pattern)}
         placeholder={isFocused ? '' : labelText}
         onFocus={() => setIsFocused(true)}

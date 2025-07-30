@@ -16,7 +16,7 @@ export default function Page({
     required: required ?? formContext.required,
     disabled: disabled ?? formContext.disabled,
     visible: visible ?? formContext.visible,
-    data: formContext.data,
+    ...formContext
   };
   return <FormContext value={context}>{children}</FormContext>;
 }

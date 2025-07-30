@@ -15,12 +15,9 @@ export interface IFormContext {
   disabled?: boolean | string;
   visible?: boolean | string;
   data?: Record<string, string>;
-  groupLevel?: number;
 };
 
-export const FormContext = createContext<IFormContext>({
-  groupLevel: 0,
-});
+export const FormContext = createContext<IFormContext>({});
 
 export default function Form({
   children,
@@ -43,7 +40,6 @@ export default function Form({
     disabled: disabled ?? formContext.disabled,
     visible: visible ?? formContext.visible,
     data: formData,
-    groupLevel: 0,
   };
 
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {

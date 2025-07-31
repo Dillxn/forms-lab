@@ -38,7 +38,11 @@ export default function Field({
   return (
     <Element
       name={name}
-      className={`${className} ${visible === false ? '!hidden' : ''}`}
+      className={`${className} ${visible === false ? '!hidden' : ''}
+        peer rounded-md bg-gray-50 p-2 ring-2 ring-transparent
+        transition-all duration-50 focus:bg-white
+        focus:placeholder-transparent focus:ring-indigo-400
+        focus:outline-0`}
       defaultValue={defaultValue}
       value={value}
       required={required ?? formContext.required}

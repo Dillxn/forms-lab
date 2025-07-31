@@ -18,12 +18,12 @@ export default function Group({
 } & Partial<IFormContext>) {
   return (
     <div
-      className="-mx-3 grid gap-2 rounded-sm p-3 py-4 mt-4 relative
+      className="-mx-3 grid gap-2 rounded-sm p-3 py-4 my-4 relative
         border border-gray-200"
     >
       <span
         className="absolute -top-2 left-3 text-xs uppercase
-          text-gray-400 bg-white font-semibold px-1"
+          text-gray-400 bg-white font-semibold px-1 select-none"
       >
         {label}
       </span>

@@ -9,7 +9,10 @@ import Radio from '@/components/forms/Radio';
 
 export default function HomePage() {
   return (
-    <Form action={createUserProfile} required>
+    <Form
+      action={createUserProfile}
+      required
+    >
       <Page>
         <Input name="firstName" />
         <Input name="lastName" />
@@ -24,7 +27,7 @@ export default function HomePage() {
           name="billingAddress"
           disabled="sameShippingBillingAddress"
         />
-        <h3>Municipality check</h3>
+        <h2>Municipality check</h2>
         <Radio
           name="isMunicipality"
           label="Are you purchasing on behalf of a municipality?"
@@ -32,6 +35,7 @@ export default function HomePage() {
         <Hint
           label="Please note that municipalities must provide a purchase order at checkout"
           visible="isMunicipality"
+          style="red"
         />
       </Page>
     </Form>

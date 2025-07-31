@@ -16,10 +16,7 @@ export default function Input({ name, label, ...props }: InputProps) {
       <Field
         element={'input'}
         name={name}
-        className="peer w-full rounded-md bg-gray-50 p-2 ring-2
-          ring-transparent transition-all duration-100 focus:bg-white
-          focus:placeholder-transparent focus:ring-indigo-400
-          focus:outline-0"
+        className="w-full"
         {...props}
       />
     </Label>

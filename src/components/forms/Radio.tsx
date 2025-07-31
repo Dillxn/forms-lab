@@ -1,5 +1,6 @@
 'use client';
 
+import Field from './Field';
 import Input, { InputProps } from './Input';
 
 type RadioProps = {
@@ -16,21 +17,30 @@ const defaultOptions = [
 
 export default function Radio({
   options = defaultOptions,
+  label,
   defaultValue,
   ...props
 }: RadioProps) {
   return (
-    <>
-      {options?.map(({ value, label }) => (
-        <label key={value}>
-          {label}
-          <Input
-            type="radio"
-            {...props}
-            defaultChecked={value === defaultValue}
-          />
-        </label>
-      ))}
-    </>
+    <fieldset className="text-gray-600">
+      <legend>{label}</legend>
+      <span className="flex flex-wrap">
+        {options?.map(({ value, label }) => (
+          <label
+            key={value}
+            className="flex items-center-safe gap-2 p-4 text-gray-900"
+          >
+            <Field
+              element="input"
+              type="radio"
+              defaultChecked={value === defaultValue}
+              className="-mt-0.5 h-3.5 w-3.5 accent-indigo-500"
+              {...props}
+            />
+            {label}
+          </label>
+        ))}
+      </span>
+    </fieldset>
   );
 }

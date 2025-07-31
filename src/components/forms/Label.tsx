@@ -1,20 +1,16 @@
 'use client';
 
-import { IFormContext } from './Form';
+import { nameToLabel } from './util/nameToLabel';
 
 export default function Label({
   label,
-  className,
-  visible,
-  isFocused,
+  name,
   children,
 }: {
   label?: string;
-  name?: string;
-  className?: string;
-  isFocused?: boolean;
+  name: string;
   children?: React.ReactNode;
-} & Partial<IFormContext>) {
+}) {
   return (
     <label className="relative">
       {children}
@@ -24,7 +20,7 @@ export default function Label({
           select-none peer-focus:text-indigo-400
           peer-focus:opacity-100"
       >
-        {label}
+        {label ?? nameToLabel(name)}
       </span>
     </label>
   );

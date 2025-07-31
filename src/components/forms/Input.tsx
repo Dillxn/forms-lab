@@ -1,52 +1,28 @@
 'use client';
 
-import { HTMLInputTypeAttribute, useContext, useState } from 'react';
-import { FormContext, IFormContext } from './Form';
+import { HTMLInputTypeAttribute } from 'react';
 import Label from './Label';
-import { isToggled } from './util/isToggled';
-import { nameToLabel } from './util/nameToLabel';
-
-export type FieldProps = {
-  label?: string;
-  name?: string;
-  defaultValue?: string;
-  value?: string;
-};
+import Field, { FieldProps } from './Field';
 
 export type InputProps = {
-  pattern?: RegExp | string;
   type?: HTMLInputTypeAttribute;
   defaultChecked?: boolean;
-} & FieldProps &
-  Partial<IFormContext>;
+} & Partial<FieldProps>;
 
 export default function Input({
   name,
   label,
-  pattern,
-  required,
-  disabled,
-  visible,
   ...props
-}: InputProps) {
-  const formContext = useContext(FormContext);
-
-  const labelText = label ?? nameToLabel(name);
-
+}: InputProps & Pick<FieldProps, 'name'> & Partial<FieldProps>) {
   return (
-    <Label label={labelText}>
-      <input
+    <Label name={name} label={label}>
+      <Field
+        element={'input'}
+        name={name}
         className="peer w-full rounded-md bg-gray-50 p-2 ring-2
           ring-transparent transition-all duration-100 focus:bg-white
-          focus:ring-indigo-400 focus:outline-0 focus:placeholder-transparent"
-        name={name}
-        required={required ?? formContext.required}
-        disabled={isToggled(
-          disabled ?? formContext.disabled,
-          formContext,
-        )}
-        pattern={String(pattern)}
-        placeholder={labelText}
+          focus:placeholder-transparent focus:ring-indigo-400
+          focus:outline-0"
         {...props}
       />
     </Label>

@@ -7,13 +7,10 @@ import Field, { FieldProps } from './Field';
 export type InputProps = {
   type?: HTMLInputTypeAttribute;
   defaultChecked?: boolean;
-} & Partial<FieldProps>;
+} & Pick<FieldProps, 'name'> &
+  Partial<FieldProps>;
 
-export default function Input({
-  name,
-  label,
-  ...props
-}: InputProps & Pick<FieldProps, 'name'> & Partial<FieldProps>) {
+export default function Input({ name, label, ...props }: InputProps) {
   return (
     <Label name={name} label={label}>
       <Field

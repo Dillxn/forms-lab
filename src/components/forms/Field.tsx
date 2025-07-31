@@ -14,6 +14,7 @@ export type FieldProps = {
   visible?: boolean | string;
   pattern?: RegExp | string;
   placeholder?: string;
+  type?: string;
 };
 
 export default function Field({
@@ -30,7 +31,7 @@ export default function Field({
   element: Element,
   ...props
 }: FieldProps & {
-  element: keyof JSX.IntrinsicElements;
+  element: 'input';
 }) {
   const formContext = useContext(FormContext);
 

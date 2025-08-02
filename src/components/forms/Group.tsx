@@ -1,14 +1,13 @@
 'use client';
 
-import { IFormContext } from './Form';
+import { useContext } from 'react';
+import { FormContext, IFormContext } from './Form';
 
 export default function Group({
   label,
   className,
-  visible,
-  required,
-  disabled,
   children,
+  ...contextProps
 }: {
   label?: string;
   name?: string;
@@ -16,18 +15,23 @@ export default function Group({
   isFocused?: boolean;
   children?: React.ReactNode;
 } & Partial<IFormContext>) {
+  const formContext = useContext(FormContext);
+  const context = {
+    ...formContext,
+    ...contextProps,
+  };
   return (
     <div
-      className="-mx-3 grid gap-2 rounded-sm p-3 py-4 my-4 relative
-        border border-gray-200"
+      className={`relative -mx-3 my-4 grid gap-2 rounded-sm border
+        border-gray-200 p-3 py-4 ${context.hidden ? 'hidden' : ''}`}
     >
       <span
-        className="absolute -top-2 left-3 text-xs uppercase
-          text-gray-400 bg-white font-semibold px-1 select-none"
+        className="absolute -top-2 left-3 bg-white px-1 text-xs
+          font-semibold text-gray-400 uppercase select-none"
       >
         {label}
       </span>
-      {children}
+      <FormContext value={context}>{children}</FormContext>
     </div>
   );
 }

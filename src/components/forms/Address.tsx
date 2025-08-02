@@ -2,10 +2,11 @@
 
 import { useContext } from 'react';
 import { FormContext, IFormContext } from './Form';
-import Input, { FieldProps } from './Input';
+import Input from './Input';
 import Select from './Select';
 import Group from './Group';
 import { nameToLabel } from './util/nameToLabel';
+import { FieldProps } from './Field';
 
 export default function Address({
   label,
@@ -14,6 +15,8 @@ export default function Address({
   value,
   required,
   disabled,
+  enabled,
+  hidden: invisible,
   visible,
 }: FieldProps & Partial<IFormContext>) {
   const formContext = useContext(FormContext);
@@ -21,6 +24,8 @@ export default function Address({
   const context: IFormContext = {
     required: required ?? formContext.required,
     disabled: disabled ?? formContext.disabled,
+    enabled: enabled ?? formContext.enabled,
+    hidden: invisible ?? formContext.hidden,
     visible: visible ?? formContext.visible,
     data: formContext.data,
   };
@@ -33,6 +38,8 @@ export default function Address({
         label={labelText}
         required={context.required}
         disabled={context.disabled}
+        enabled={context.enabled}
+        hidden={context.hidden}
         visible={context.visible}
       >
         <FormContext value={context}>

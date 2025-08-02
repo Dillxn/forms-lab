@@ -25,7 +25,7 @@ export default function HomePage() {
         />
         <Address
           name="billingAddress"
-          disabled="sameShippingBillingAddress"
+          hidden="sameShippingBillingAddress"
         />
         <h2>Municipality check</h2>
         <Radio

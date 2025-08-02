@@ -1,5 +1,5 @@
-import React, { JSX, useContext } from 'react';
-import { FormContext } from './Form';
+import React, { useContext } from 'react';
+import { FormContext, IFormContext } from './Form';
 import { nameToLabel } from './util/nameToLabel';
 import { isToggled } from './util/isToggled';
 
@@ -9,50 +9,53 @@ export type FieldProps = {
   className?: string;
   defaultValue?: string;
   value?: string;
-  required?: boolean;
-  disabled?: boolean | string;
-  visible?: boolean | string;
   pattern?: RegExp | string;
   placeholder?: string;
   type?: string;
+  defaultChecked?: boolean;
 };
 
 export default function Field({
+  element: Element,
   name,
   label,
   className,
   defaultValue,
   value,
-  required,
-  disabled,
-  visible,
   pattern,
   placeholder,
-  element: Element,
-  ...props
-}: FieldProps & {
+  type,
+  defaultChecked,
+  ...contextProps
+}: {
   element: 'input';
-}) {
+} & FieldProps &
+  Partial<IFormContext>) {
   const formContext = useContext(FormContext);
+  const context = {
+    ...formContext,
+    ...contextProps,
+  };
 
   return (
-    <Element
-      name={name}
-      className={`${className} ${visible === false ? '!hidden' : ''}
-        peer rounded-md bg-gray-50 p-2 ring-2 ring-transparent
-        transition-all duration-50 focus:bg-white
-        focus:placeholder-transparent focus:ring-indigo-400
-        focus:outline-0`}
-      defaultValue={defaultValue}
-      value={value}
-      required={required ?? formContext.required}
-      disabled={isToggled(
-        disabled ?? formContext.disabled,
-        formContext,
-      )}
-      pattern={String(pattern)}
-      placeholder={placeholder ?? label ?? nameToLabel(name)}
-      {...props}
-    />
+    <>
+      <Element
+        name={name}
+        className={`${className}
+          ${isToggled('hidden', context) ? '!hidden' : ''} peer
+          rounded-md bg-gray-50 p-2 ring-2 ring-transparent
+          transition-all duration-50 focus:bg-white
+          focus:placeholder-transparent focus:ring-indigo-400
+          focus:outline-0`}
+        defaultValue={defaultValue}
+        value={value}
+        pattern={String(pattern)}
+        placeholder={placeholder ?? label ?? nameToLabel(name)}
+        type={type}
+        defaultChecked={defaultChecked}
+        required={isToggled('required', context)}
+        disabled={isToggled('disabled', context)}
+      />
+    </>
   );
 }

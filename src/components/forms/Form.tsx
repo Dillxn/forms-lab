@@ -13,18 +13,18 @@ type FormAction = (state: unknown, payload: FormData) => unknown;
 export interface IFormContext {
   required?: boolean;
   disabled?: boolean | string;
+  enabled?: boolean | string;
+  hidden?: boolean | string;
   visible?: boolean | string;
-  data?: Record<string, string>;
+  data: Record<string, string>;
 }
 
-export const FormContext = createContext<IFormContext>({});
+export const FormContext = createContext<IFormContext>({ data: {} });
 
 export default function Form({
   children,
   action,
-  required,
-  disabled,
-  visible,
+  ...contextProps
 }: {
   children: React.ReactNode;
   action: FormAction;
@@ -36,16 +36,17 @@ export default function Form({
   const formContext = useContext(FormContext);
 
   const context: IFormContext = {
-    required: required ?? formContext.required,
-    disabled: disabled ?? formContext.disabled,
-    visible: visible ?? formContext.visible,
+    ...formContext,
+    ...contextProps,
     data: formData,
   };
 
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {
     setFormData((formData) => ({
       ...formData,
-      [event.target?.name]: event.target?.value,
+      [event.target?.name]: !event.target?.validity.valueMissing
+        ? event.target?.value
+        : undefined,
     }));
   };
 
@@ -57,8 +58,8 @@ export default function Form({
       <FormContext value={context}>{children}</FormContext>
       <button
         type="submit"
-        className="mt-4 rounded bg-indigo-500 p-1.5 text-sm text-gray-50
-          uppercase cursor-pointer"
+        className="mt-4 cursor-pointer rounded bg-indigo-500 p-1.5
+          text-sm text-gray-50 uppercase"
       >
         Submit
       </button>

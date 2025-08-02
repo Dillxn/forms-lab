@@ -1,13 +1,9 @@
 'use client';
 
-import { HTMLInputTypeAttribute } from 'react';
 import Label from './Label';
 import Field, { FieldProps } from './Field';
 
-export type InputProps = {
-  type?: HTMLInputTypeAttribute;
-  defaultChecked?: boolean;
-} & Pick<FieldProps, 'name'> &
+export type InputProps = Pick<FieldProps, 'name'> &
   Partial<FieldProps>;
 
 export default function Input({ name, label, ...props }: InputProps) {

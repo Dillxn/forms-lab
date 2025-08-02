@@ -13,7 +13,7 @@ export type FieldProps = {
   placeholder?: string;
   type?: string;
   defaultChecked?: boolean;
-};
+} & Partial<IFormContext>;
 
 export default function Field({
   element: Element,
@@ -29,8 +29,7 @@ export default function Field({
   ...contextProps
 }: {
   element: 'input';
-} & FieldProps &
-  Partial<IFormContext>) {
+} & FieldProps) {
   const formContext = useContext(FormContext);
   const context = {
     ...formContext,

@@ -35,6 +35,7 @@ export default function Radio({
               type="radio"
               defaultChecked={value === defaultValue}
               className="-mt-0.5 h-3.5 w-3.5 accent-indigo-500"
+              value={value}
               {...props}
             />
             {label}

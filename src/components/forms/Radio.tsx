@@ -1,7 +1,7 @@
 'use client';
 
 import Field from './Field';
-import Input, { InputProps } from './Input';
+import { InputProps } from './Input';
 
 type RadioProps = {
   options?: Array<{

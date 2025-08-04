@@ -8,7 +8,10 @@ export type InputProps = Pick<FieldProps, 'name'> &
 
 export default function Input({ name, label, ...props }: InputProps) {
   return (
-    <Label name={name} label={label}>
+    <Label
+      name={name}
+      label={label}
+    >
       <Field
         element={'input'}
         name={name}

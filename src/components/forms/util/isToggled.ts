@@ -14,7 +14,7 @@ export const isToggled = (
     return propertyValue;
   } else if (propertyIsFieldName) {
     const fieldValue = context.data[propertyValue];
-    const fieldIsToggled = fieldValue === 'true';
+    const fieldIsToggled = fieldValue === 'true' || fieldValue === 'on';
 
     return fieldIsToggled;
   }

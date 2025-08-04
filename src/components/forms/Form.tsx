@@ -42,11 +42,14 @@ export default function Form({
   };
 
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {
+    const fieldValue =
+      event.target?.type === 'checkbox'
+        ? event.target.checked && event.target.value
+        : event.target?.value;
+
     setFormData((formData) => ({
       ...formData,
-      [event.target?.name]: !event.target?.validity.valueMissing
-        ? event.target?.value
-        : undefined,
+      [event.target?.name]: fieldValue,
     }));
   };
 

@@ -13,7 +13,7 @@ export default function Label({
 }: {
   label?: string;
   name?: string;
-  className: string;
+  className?: string;
   children?: React.ReactNode;
 }) {
   const formContext = useContext(FormContext);

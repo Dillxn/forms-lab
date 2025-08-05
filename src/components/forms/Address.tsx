@@ -48,7 +48,7 @@ export default function Address({
         <Input
           name={`${name}Zip`}
           label="Zip Code"
-          pattern={/\d{5}(\-\d{4})?/}
+          pattern={/\d{5}(-\d{4})?/}
         />
       </Group>
     </>

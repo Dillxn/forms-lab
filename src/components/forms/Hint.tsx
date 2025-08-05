@@ -2,7 +2,7 @@
 
 import { useContext } from 'react';
 import { FormContext, IFormContext } from './Form';
-import { toggleClasses } from './util/toggleClasses';
+import { isHidden } from './util/isHidden';
 
 export default function Hint({
   label,
@@ -19,10 +19,10 @@ export default function Hint({
     ...formContext,
     ...contextProps
   }
-  return (
+  return !isHidden(context) && (
     <p
-      className={`rounded-md bg-gray-100 p-2.5 px-3 leading-5
-        text-gray-600 ring ring-gray-200 ${toggleClasses(context)}`}
+      className="rounded-md bg-gray-100 p-2.5 px-3 leading-5
+        text-gray-600 ring ring-gray-200"
     >
       {label}
       {children}

@@ -2,7 +2,7 @@
 
 import { useContext } from 'react';
 import { FormContext, IFormContext } from './Form';
-import { toggleClasses } from './util/toggleClasses';
+import { isHidden } from './util/isHidden';
 
 export default function Group({
   label,
@@ -17,10 +17,10 @@ export default function Group({
     ...formContext,
     ...contextProps,
   };
-  return (
+  return !isHidden(context) && (
     <div
-      className={`relative -mx-3 my-4 grid gap-2 rounded-sm border
-        border-gray-200 p-3 py-4 ${toggleClasses(context)}`}
+      className="relative -mx-3 my-4 grid gap-2 rounded-sm border
+        border-gray-200 p-3 py-4"
     >
       <span
         className="absolute -top-2 left-3 bg-white px-1 text-xs

@@ -2,6 +2,7 @@
 
 import Field from './Field';
 import { InputProps } from './Input';
+import Label from './Label';
 
 type RadioProps = {
   options?: Array<{
@@ -26,7 +27,7 @@ export default function Radio({
       <legend>{label}</legend>
       <span className="flex flex-wrap">
         {options?.map(({ value, label }) => (
-          <label
+          <Label
             key={value}
             className="flex items-center-safe gap-2 p-4 text-gray-900"
           >
@@ -39,7 +40,7 @@ export default function Radio({
               {...props}
             />
             {label}
-          </label>
+          </Label>
         ))}
       </span>
     </fieldset>

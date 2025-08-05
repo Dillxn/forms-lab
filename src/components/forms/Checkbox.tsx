@@ -2,6 +2,7 @@
 
 import Field from './Field';
 import { InputProps } from './Input';
+import Label from './Label';
 
 export default function Checkbox({
   label,
@@ -10,7 +11,7 @@ export default function Checkbox({
 }: Omit<InputProps, 'type'>) {
   return (
     <>
-      <label
+      <Label
         className="flex items-center-safe justify-items-start gap-3
           text-gray-600 select-none"
       >
@@ -24,7 +25,7 @@ export default function Checkbox({
           {...props}
         />
         {label}
-      </label>
+      </Label>
     </>
   );
 }

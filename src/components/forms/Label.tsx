@@ -1,18 +1,27 @@
 'use client';
 
+import { useContext } from 'react';
 import { nameToLabel } from './util/nameToLabel';
+import { FormContext } from './Form';
+import { isDisabled } from './util/isDisabled';
 
 export default function Label({
   label,
   name,
+  className,
   children,
 }: {
   label?: string;
-  name: string;
+  name?: string;
+  className: string;
   children?: React.ReactNode;
 }) {
+  const formContext = useContext(FormContext);
   return (
-    <label className="relative">
+    <label
+      className={`relative ${className}
+        ${isDisabled(formContext) ? 'cursor-not-allowed' : ''}`}
+    >
       {children}
       <span
         className="absolute -top-1 left-2 rounded-xs bg-white px-0.5
@@ -20,7 +29,7 @@ export default function Label({
           select-none peer-focus:text-indigo-400
           peer-focus:opacity-100"
       >
-        {label ?? nameToLabel(name)}
+        {label ?? nameToLabel(name) ?? ''}
       </span>
     </label>
   );

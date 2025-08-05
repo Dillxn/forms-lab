@@ -3,6 +3,7 @@ import { FormContext, IFormContext } from './Form';
 import { nameToLabel } from './util/nameToLabel';
 import { isToggled } from './util/isToggled';
 import { isHidden } from './util/isHidden';
+import { isDisabled } from './util/isDisabled';
 
 export type FieldProps = {
   children?: React.ReactNode;
@@ -46,7 +47,7 @@ export default function Field({
         className={`${className} peer rounded-md bg-gray-50 p-2 ring-2
           ring-transparent transition-all duration-50 focus:bg-white
           focus:placeholder-transparent focus:ring-indigo-400
-          focus:outline-0`}
+          focus:outline-0 disabled:cursor-not-allowed`}
         defaultValue={defaultValue}
         value={value}
         pattern={
@@ -58,7 +59,7 @@ export default function Field({
         type={type}
         defaultChecked={defaultChecked}
         required={isToggled('required', context)}
-        disabled={isToggled('disabled', context)}
+        disabled={isDisabled(context)}
       >
         {children}
       </Element>

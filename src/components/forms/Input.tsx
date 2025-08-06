@@ -6,7 +6,12 @@ import Field, { FieldProps } from './Field';
 export type InputProps = Pick<FieldProps, 'name'> &
   Partial<FieldProps>;
 
-export default function Input({ name, label, ...props }: InputProps) {
+export default function Input({
+  name,
+  label,
+  className,
+  ...props
+}: InputProps) {
   return (
     <Label
       name={name}
@@ -15,7 +20,8 @@ export default function Input({ name, label, ...props }: InputProps) {
       <Field
         element={'input'}
         name={name}
-        className="w-full"
+        label={label}
+        className={`${className ?? ''} w-full`}
         {...props}
       />
     </Label>

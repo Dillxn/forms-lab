@@ -19,8 +19,8 @@ export default function Group({
   };
   return !isHidden(context) && (
     <div
-      className="relative -mx-3 my-4 grid gap-2 rounded-sm border
-        border-gray-200 p-3 py-4"
+      className="relative -mx-3 my-4 grid gap-2 rounded-md border
+        border-gray-200 p-4 pt-5"
     >
       <span
         className="absolute -top-2 left-3 bg-white px-1 text-xs

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { ChangeEvent, RefObject, useContext } from 'react';
 import { FormContext, IFormContext } from './Form';
 import { nameToLabel } from './util/nameToLabel';
 import { isToggled } from './util/isToggled';
@@ -7,11 +7,10 @@ import { isDisabled } from './util/isDisabled';
 
 export type FieldProps = {
   children?: React.ReactNode;
-  name: string;
-  label?: string;
   className?: string;
+  name?: string;
+  label?: string;
   defaultValue?: string;
-  value?: string;
   pattern?: RegExp | string;
   placeholder?: string;
   type?: string;
@@ -20,19 +19,24 @@ export type FieldProps = {
 
 export default function Field({
   element: Element,
+  className,
+  value,
   children,
   name,
   label,
-  className,
   defaultValue,
-  value,
   pattern,
   placeholder,
   type,
   defaultChecked,
+  ref,
+  onChange,
   ...contextProps
 }: {
-  element: 'input';
+  element: 'input' | 'select';
+  value?: string;
+  ref?: RefObject<null>;
+  onChange?: (event: ChangeEvent) => void;
 } & FieldProps) {
   const formContext = useContext(FormContext);
   const context = {
@@ -43,13 +47,13 @@ export default function Field({
   return (
     !isHidden(context) && (
       <Element
-        name={name}
-        className={`${className} peer rounded-md bg-gray-50 p-2 ring-2
-          ring-transparent transition-all duration-50 focus:bg-white
-          focus:placeholder-transparent focus:ring-indigo-400
-          focus:outline-0 disabled:cursor-not-allowed`}
-        defaultValue={defaultValue}
+        className={`${className ?? ''} peer rounded-md
+          bg-gray-50 p-2 px-3 focus:ring-2 focus:ring-indigo-400
+          focus:bg-white focus:placeholder-transparent
+          focus:outline-indigo-400 disabled:cursor-not-allowed`}
         value={value}
+        name={name}
+        defaultValue={defaultValue}
         pattern={
           pattern instanceof RegExp
             ? pattern.toString().slice(1, -1)
@@ -60,6 +64,8 @@ export default function Field({
         defaultChecked={defaultChecked}
         required={isToggled('required', context)}
         disabled={isDisabled(context)}
+        ref={ref}
+        onChange={onChange}
       >
         {children}
       </Element>

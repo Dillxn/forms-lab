@@ -1,63 +1,70 @@
 'use client';
 
-import React, { useContext, useRef, useState } from 'react';
-import { FormContext, IFormContext } from './Form';
-import { FieldProps } from './Input';
-import { isToggled } from './util/isToggled';
+import React, { useRef } from 'react';
+import Field from './Field';
 import { nameToLabel } from './util/nameToLabel';
 import Label from './Label';
+import Input, { InputProps } from './Input';
 
 type LabelProps = {
   options?: Array<{
     value: string;
     label?: string;
   }>;
-};
+} & InputProps;
 
 export default function Select({
-  label,
   name,
-  defaultValue,
-  required,
-  disabled,
-  visible,
+  label,
   options,
-  children,
-}: FieldProps &
-  Partial<IFormContext> &
-  LabelProps & { children?: React.ReactNode }) {
-  const [isFocused, setIsFocused] = useState(false);
-  const formContext = useContext(FormContext);
+  defaultValue,
+  ...props
+}: LabelProps) {
   const labelText = label ?? nameToLabel(name);
-  const ref = useRef<HTMLSelectElement>(null);
-
+  const selectRef = useRef(null);
+  const inputRef = useRef(null);
   return (
-    <Label label={labelText} isFocused={isFocused}>
-      <select
-        ref={ref}
-        name={name}
-        required={required ?? formContext.required}
-        disabled={isToggled(
-          disabled ?? formContext.disabled,
-          formContext,
-        )}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        className={`${ref.current?.value === '__none__' && 'text-gray-500'}
-          bg-gray-50 p-2 pl-1.5 rounded-md w-full focus:outline-0
-          focus:ring-2 focus:ring-indigo-400 focus:bg-white`}
-        defaultValue={defaultValue ?? '__none__'}
+    <>
+      <Label
+        label={labelText}
+        className="group"
       >
-        <option value="__none__" disabled={true} hidden={true}>
-          {labelText}
-        </option>
-        {children ??
-          options?.map(({ value, label }) => (
-            <option key={value} value={value}>
+        <Field
+          name={name}
+          element="select"
+          className="w-full appearance-none pr-7"
+          ref={selectRef}
+          defaultValue={defaultValue ?? ''}
+          {...props}
+        >
+          <option
+            hidden
+            disabled
+            value=""
+          ></option>
+          {options?.map(({ value, label }) => (
+            <option
+              key={value}
+              value={value}
+            >
               {label ?? value}
             </option>
           ))}
-      </select>
-    </Label>
+        </Field>
+        <div
+          className="pointer-events-none absolute top-1/2 right-2.5
+            z-1 -translate-1 text-lg text-gray-400"
+        >
+          🢓
+        </div>
+        <span
+          className="pointer-events-none absolute top-0 left-0 block
+            p-2 px-3 text-gray-500 peer-autofill:hidden
+            peer-valid:hidden"
+        >
+          {labelText}
+        </span>
+      </Label>
+    </>
   );
 }

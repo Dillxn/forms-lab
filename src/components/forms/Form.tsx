@@ -3,12 +3,13 @@
 import {
   ChangeEvent,
   createContext,
+  Dispatch,
+  SetStateAction,
   useActionState,
-  use,
   useRef,
   useState,
 } from 'react';
-import Buttons from './util/components/Buttons';
+import NavButtons from './util/components/NavButtons';
 
 type FormAction = (state: unknown, payload: FormData) => unknown;
 
@@ -23,16 +24,14 @@ export interface IContextProps {
 export interface IFormContext extends IContextProps {
   data: Record<string, string>;
   pageIndex: number;
-  setPageIndex: (index: number) => void;
+  setPageIndex: Dispatch<SetStateAction<number>>;
   registerPage: (id: symbol) => number;
+  getPageCount: () => number;
 }
 
-export const FormContext = createContext<IFormContext>({
-  data: {},
-  pageIndex: 0,
-  setPageIndex: (index: number) => null,
-  registerPage: (id: symbol) => 0,
-});
+export const FormContext = createContext<IFormContext>(
+  {} as IFormContext,
+);
 
 export default function Form({
   children,
@@ -46,16 +45,15 @@ export default function Form({
   const [formData, setFormData] = useState({});
   const [pageIndex, setPageIndex] = useState(0);
   const pageIds = useRef(new Set<symbol>());
-  const formContext = use(FormContext);
 
   const context: IFormContext = {
-    ...formContext,
     ...contextProps,
     data: formData,
     pageIndex,
     setPageIndex,
     registerPage: (id: symbol) =>
       [...pageIds.current.add(id)].indexOf(id),
+    getPageCount: () => [...pageIds.current].length,
   };
 
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {
@@ -75,8 +73,10 @@ export default function Form({
       onChange={onChange}
       className="grid gap-2 p-2 transition-all duration-300"
     >
-      <FormContext value={context}>{children}</FormContext>
-      <Buttons getPageCount={() => [...pageIds.current].length} />
+      <FormContext value={context}>
+        {children}
+        <NavButtons />
+      </FormContext>
     </form>
   );
 }

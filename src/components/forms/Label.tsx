@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { use } from 'react';
 import { nameToLabel } from './util/nameToLabel';
 import { FormContext } from './Form';
 import { isDisabled } from './util/isDisabled';
@@ -16,7 +16,7 @@ export default function Label({
   className?: string;
   children?: React.ReactNode;
 }) {
-  const formContext = useContext(FormContext);
+  const formContext = use(FormContext);
   return (
     <label
       className={`relative ${className ?? ''}

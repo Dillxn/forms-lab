@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { use } from 'react';
 import { FormContext, IContextProps } from './Form';
 import { isHidden } from './util/isHidden';
 
@@ -12,7 +12,7 @@ export default function Group({
   label?: string;
   children?: React.ReactNode;
 } & Partial<IContextProps>) {
-  const formContext = useContext(FormContext);
+  const formContext = use(FormContext);
   const context = {
     ...formContext,
     ...contextProps,

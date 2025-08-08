@@ -1,4 +1,4 @@
-import React, { ChangeEvent, RefObject, useContext } from 'react';
+import React, { ChangeEvent, RefObject, use } from 'react';
 import { FormContext, IContextProps } from './Form';
 import { nameToLabel } from './util/nameToLabel';
 import { isToggled } from './util/isToggled';
@@ -38,7 +38,7 @@ export default function Field({
   ref?: RefObject<null>;
   onChange?: (event: ChangeEvent) => void;
 } & FieldProps) {
-  const formContext = useContext(FormContext);
+  const formContext = use(FormContext);
   const context = {
     ...formContext,
     ...contextProps,

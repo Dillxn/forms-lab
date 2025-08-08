@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useRef } from 'react';
+import { use, useRef } from 'react';
 import { FormContext, IContextProps } from './Form';
 
 export default function Page({
@@ -9,7 +9,7 @@ export default function Page({
 }: {
   children: React.ReactNode;
 } & Partial<IContextProps>) {
-  const formContext = useContext(FormContext);
+  const formContext = use(FormContext);
   const pageId = useRef(Symbol());
   const pageNumber = useRef(formContext.registerPage(pageId.current));
   const isCurrentPage = pageNumber.current === formContext.pageIndex;

@@ -4,7 +4,7 @@ import {
   ChangeEvent,
   createContext,
   useActionState,
-  useContext,
+  use,
   useRef,
   useState,
 } from 'react';
@@ -46,7 +46,7 @@ export default function Form({
   const [formData, setFormData] = useState({});
   const [pageIndex, setPageIndex] = useState(0);
   const pageIds = useRef(new Set<symbol>());
-  const formContext = useContext(FormContext);
+  const formContext = use(FormContext);
 
   const registerPage = (symbol: symbol) => {
     pageIds.current.add(symbol);

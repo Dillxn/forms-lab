@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { use } from 'react';
 import { FormContext, IContextProps, IFormContext } from './Form';
 import { isHidden } from './util/isHidden';
 
@@ -14,7 +14,7 @@ export default function Hint({
   children?: React.ReactNode;
   style?: 'red' | 'yellow' | 'green' | 'blue' | 'gray';
 } & Partial<IContextProps>) {
-  const formContext = useContext(FormContext);
+  const formContext = use(FormContext);
   const context: IFormContext = {
     ...formContext,
     ...contextProps

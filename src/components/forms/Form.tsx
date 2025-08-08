@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import Button from './Button';
+import Buttons from './util/components/Buttons';
 
 type FormAction = (state: unknown, payload: FormData) => unknown;
 
@@ -48,20 +48,14 @@ export default function Form({
   const pageIds = useRef(new Set<symbol>());
   const formContext = use(FormContext);
 
-  const registerPage = (id: symbol) => {
-    pageIds.current.add(id);
-    return [...pageIds.current].indexOf(id);
-  };
-
-  const getPageCount = () => [...pageIds.current].length;
-
   const context: IFormContext = {
     ...formContext,
     ...contextProps,
     data: formData,
     pageIndex,
     setPageIndex,
-    registerPage,
+    registerPage: (id: symbol) =>
+      [...pageIds.current.add(id)].indexOf(id),
   };
 
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {
@@ -82,11 +76,7 @@ export default function Form({
       className="grid gap-2 p-2 transition-all duration-300"
     >
       <FormContext value={context}>{children}</FormContext>
-      <Button
-        type="submit"
-      >
-        Submit
-      </Button>
+      <Buttons getPageCount={() => [...pageIds.current].length} />
     </form>
   );
 }

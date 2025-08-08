@@ -23,15 +23,15 @@ export interface IContextProps {
 export interface IFormContext extends IContextProps {
   data: Record<string, string>;
   pageIndex: number;
-  setPageIndex: (newData: number) => void;
-  registerPage: (symbol: symbol) => number;
+  setPageIndex: (index: number) => void;
+  registerPage: (id: symbol) => number;
 }
 
 export const FormContext = createContext<IFormContext>({
   data: {},
   pageIndex: 0,
-  setPageIndex: (newData: number) => null,
-  registerPage: (symbol: symbol) => 0,
+  setPageIndex: (index: number) => null,
+  registerPage: (id: symbol) => 0,
 });
 
 export default function Form({
@@ -48,9 +48,9 @@ export default function Form({
   const pageIds = useRef(new Set<symbol>());
   const formContext = use(FormContext);
 
-  const registerPage = (symbol: symbol) => {
-    pageIds.current.add(symbol);
-    return [...pageIds.current].indexOf(symbol);
+  const registerPage = (id: symbol) => {
+    pageIds.current.add(id);
+    return [...pageIds.current].indexOf(id);
   };
 
   const context: IFormContext = {

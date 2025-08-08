@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { FormContext, IFormContext } from './Form';
+import { FormContext, IContextProps, IFormContext } from './Form';
 import { isHidden } from './util/isHidden';
 
 export default function Hint({
@@ -13,7 +13,7 @@ export default function Hint({
   label?: string;
   children?: React.ReactNode;
   style?: 'red' | 'yellow' | 'green' | 'blue' | 'gray';
-} & Partial<IFormContext>) {
+} & Partial<IContextProps>) {
   const formContext = useContext(FormContext);
   const context: IFormContext = {
     ...formContext,

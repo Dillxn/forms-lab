@@ -1,7 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
-import { FormContext, IFormContext } from './Form';
+import { IContextProps } from './Form';
 import Input from './Input';
 import Select from './Select';
 import Group from './Group';
@@ -14,7 +13,7 @@ export default function Address({
   defaultValue,
   ...contextProps
 }: Pick<FieldProps, 'label' | 'name' | 'defaultValue'> &
-  Partial<IFormContext>) {
+  Partial<IContextProps>) {
   const labelText = label ?? nameToLabel(name);
 
   return (

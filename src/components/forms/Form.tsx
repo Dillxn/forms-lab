@@ -5,21 +5,33 @@ import {
   createContext,
   useActionState,
   useContext,
+  useRef,
   useState,
 } from 'react';
 
 type FormAction = (state: unknown, payload: FormData) => unknown;
 
-export interface IFormContext {
+export interface IContextProps {
   required?: boolean;
   disabled?: boolean | string;
   enabled?: boolean | string;
   hidden?: boolean | string;
   visible?: boolean | string;
-  data: Record<string, string>;
 }
 
-export const FormContext = createContext<IFormContext>({ data: {} });
+export interface IFormContext extends IContextProps {
+  data: Record<string, string>;
+  pageIndex: number;
+  setPageIndex: (newData: number) => void;
+  registerPage: (symbol: symbol) => number;
+}
+
+export const FormContext = createContext<IFormContext>({
+  data: {},
+  pageIndex: 0,
+  setPageIndex: (newData: number) => null,
+  registerPage: (symbol: symbol) => 0,
+});
 
 export default function Form({
   children,
@@ -28,17 +40,25 @@ export default function Form({
 }: {
   children: React.ReactNode;
   action: FormAction;
-} & Partial<IFormContext>) {
+} & Partial<IContextProps>) {
   const [state, formAction, isPending] = useActionState(action, null);
-
   const [formData, setFormData] = useState({});
-
+  const [pageIndex, setPageIndex] = useState(0);
+  const pageIds = useRef(new Set<symbol>());
   const formContext = useContext(FormContext);
+
+  const registerPage = (symbol: symbol) => {
+    pageIds.current.add(symbol);
+    return [...pageIds.current].indexOf(symbol);
+  };
 
   const context: IFormContext = {
     ...formContext,
     ...contextProps,
     data: formData,
+    pageIndex,
+    setPageIndex,
+    registerPage,
   };
 
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {

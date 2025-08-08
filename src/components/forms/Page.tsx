@@ -1,15 +1,17 @@
 'use client';
 
-import { useContext } from 'react';
-import { FormContext, IFormContext } from './Form';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { FormContext, IContextProps } from './Form';
 
 export default function Page({
   children,
   ...contextProps
 }: {
   children: React.ReactNode;
-} & Partial<IFormContext>) {
+} & Partial<IContextProps>) {
   const formContext = useContext(FormContext);
+  const pageId = useRef(Symbol());
+  const pageNumber = useRef(formContext.registerPage(pageId.current));
   return (
     <FormContext
       value={{
@@ -17,6 +19,7 @@ export default function Page({
         ...contextProps,
       }}
     >
+      {pageNumber.current}
       {children}
     </FormContext>
   );

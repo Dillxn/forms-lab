@@ -1,5 +1,5 @@
 import React, { ChangeEvent, RefObject, useContext } from 'react';
-import { FormContext, IFormContext } from './Form';
+import { FormContext, IContextProps } from './Form';
 import { nameToLabel } from './util/nameToLabel';
 import { isToggled } from './util/isToggled';
 import { isHidden } from './util/isHidden';
@@ -15,7 +15,7 @@ export type FieldProps = {
   placeholder?: string;
   type?: string;
   defaultChecked?: boolean;
-} & Partial<IFormContext>;
+} & Partial<IContextProps>;
 
 export default function Field({
   element: Element,

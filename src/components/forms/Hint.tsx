@@ -2,7 +2,7 @@
 
 import { use } from 'react';
 import { FormContext, IContextProps, IFormContext } from './Form';
-import { isHidden } from './util/isHidden';
+import { isHidden } from './util/functions/isHidden';
 
 export default function Hint({
   label,

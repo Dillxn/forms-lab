@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useRef } from 'react';
-import Field from './Field';
-import { nameToLabel } from './util/nameToLabel';
+import Field from './util/components/Field';
+import { nameToLabel } from './util/functions/nameToLabel';
 import Label from './Label';
 import Input, { InputProps } from './Input';
 

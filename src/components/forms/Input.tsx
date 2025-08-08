@@ -1,7 +1,7 @@
 'use client';
 
 import Label from './Label';
-import Field, { FieldProps } from './Field';
+import Field, { FieldProps } from './util/components/Field';
 
 export type InputProps = Pick<FieldProps, 'name'> &
   Partial<FieldProps>;

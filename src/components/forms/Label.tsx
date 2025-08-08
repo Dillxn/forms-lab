@@ -1,9 +1,9 @@
 'use client';
 
 import { use } from 'react';
-import { nameToLabel } from './util/nameToLabel';
+import { nameToLabel } from './util/functions/nameToLabel';
 import { FormContext } from './Form';
-import { isDisabled } from './util/isDisabled';
+import { isDisabled } from './util/functions/isDisabled';
 
 export default function Label({
   label,

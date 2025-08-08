@@ -53,6 +53,8 @@ export default function Form({
     return [...pageIds.current].indexOf(id);
   };
 
+  const getPageCount = () => [...pageIds.current].length;
+
   const context: IFormContext = {
     ...formContext,
     ...contextProps,

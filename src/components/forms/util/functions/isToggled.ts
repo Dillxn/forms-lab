@@ -1,4 +1,4 @@
-import { IFormContext } from '../Form';
+import { IFormContext } from '../../Form';
 
 // isToggled() - Returns whether a property is set explicitly,
 //                or dependently on a field

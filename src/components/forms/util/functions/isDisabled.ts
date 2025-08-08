@@ -1,4 +1,4 @@
-import { IFormContext } from '../Form';
+import { IFormContext } from '../../Form';
 import { isToggled } from './isToggled';
 
 export const isDisabled = (context: IFormContext) =>

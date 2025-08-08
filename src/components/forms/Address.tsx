@@ -4,8 +4,8 @@ import { IContextProps } from './Form';
 import Input from './Input';
 import Select from './Select';
 import Group from './Group';
-import { nameToLabel } from './util/nameToLabel';
-import { FieldProps } from './Field';
+import { nameToLabel } from './util/functions/nameToLabel';
+import { FieldProps } from './util/components/Field';
 
 export default function Address({
   label,

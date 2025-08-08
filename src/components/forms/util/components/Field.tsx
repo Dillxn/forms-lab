@@ -1,9 +1,9 @@
 import React, { ChangeEvent, RefObject, use } from 'react';
-import { FormContext, IContextProps } from './Form';
-import { nameToLabel } from './util/nameToLabel';
-import { isToggled } from './util/isToggled';
-import { isHidden } from './util/isHidden';
-import { isDisabled } from './util/isDisabled';
+import { FormContext, IContextProps } from '../../Form';
+import { nameToLabel } from '../functions/nameToLabel';
+import { isToggled } from '../functions/isToggled';
+import { isHidden } from '../functions/isHidden';
+import { isDisabled } from '../functions/isDisabled';
 
 export type FieldProps = {
   children?: React.ReactNode;

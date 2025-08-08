@@ -4,6 +4,7 @@ import {
   ChangeEvent,
   createContext,
   Dispatch,
+  RefObject,
   SetStateAction,
   useActionState,
   useRef,
@@ -22,6 +23,7 @@ export interface IContextProps {
 }
 
 export interface IFormContext extends IContextProps {
+  formRef: RefObject<HTMLFormElement | null>;
   data: Record<string, string>;
   pageIndex: number;
   setPageIndex: Dispatch<SetStateAction<number>>;
@@ -45,9 +47,11 @@ export default function Form({
   const [formData, setFormData] = useState({});
   const [pageIndex, setPageIndex] = useState(0);
   const pageIds = useRef(new Set<symbol>());
+  const formRef = useRef<HTMLFormElement>(null);
 
   const context: IFormContext = {
     ...contextProps,
+    formRef,
     data: formData,
     pageIndex,
     setPageIndex,
@@ -71,6 +75,7 @@ export default function Form({
   return (
     <form
       onChange={onChange}
+      ref={formRef}
       className="grid gap-2 p-2 transition-all duration-300"
     >
       <FormContext value={context}>

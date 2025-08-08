@@ -21,6 +21,7 @@ export default function Page({
       }}
     >
       <div
+        data-page={pageNumber.current}
         className={`grid gap-[inherit]
           ${!isCurrentPage ? 'hidden' : ''}`}
       >

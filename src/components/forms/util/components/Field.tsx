@@ -47,6 +47,7 @@ export default function Field({
   return (
     !isHidden(context) && (
       <Element
+        data-field
         className={`${className ?? ''} peer rounded-md
           bg-gray-50 p-2 px-3 focus:ring-2 focus:ring-indigo-400
           focus:bg-white focus:placeholder-transparent

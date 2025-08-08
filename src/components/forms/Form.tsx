@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import Button from './Button';
 
 type FormAction = (state: unknown, payload: FormData) => unknown;
 
@@ -79,13 +80,11 @@ export default function Form({
       className="grid gap-2 p-2 transition-all duration-300"
     >
       <FormContext value={context}>{children}</FormContext>
-      <button
+      <Button
         type="submit"
-        className="mt-4 cursor-pointer rounded bg-indigo-500 p-1.5
-          text-sm text-gray-50 uppercase"
       >
         Submit
-      </button>
+      </Button>
     </form>
   );
 }

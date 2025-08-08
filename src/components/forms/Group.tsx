@@ -19,7 +19,7 @@ export default function Group({
   };
   return !isHidden(context) && (
     <div
-      className="relative -mx-3 my-4 grid gap-2 rounded-md border
+      className="relative -mx-3 mt-3 mb-1 grid gap-[inherit] rounded-md border
         border-gray-200 p-4 pt-5"
     >
       <span

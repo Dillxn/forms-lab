@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import { FormContext, IContextProps } from './Form';
 
 export default function Page({
@@ -12,6 +12,7 @@ export default function Page({
   const formContext = useContext(FormContext);
   const pageId = useRef(Symbol());
   const pageNumber = useRef(formContext.registerPage(pageId.current));
+  const isCurrentPage = pageNumber.current === formContext.pageIndex;
   return (
     <FormContext
       value={{
@@ -19,8 +20,12 @@ export default function Page({
         ...contextProps,
       }}
     >
-      {pageNumber.current}
-      {children}
+      <div
+        className={`grid gap-[inherit]
+          ${!isCurrentPage ? 'hidden' : ''}`}
+      >
+        {children}
+      </div>
     </FormContext>
   );
 }
